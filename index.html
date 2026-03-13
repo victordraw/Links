@@ -140,8 +140,8 @@
         <!-- Cabeçalho / Perfil -->
         <header class="text-center mb-10 flex flex-col items-center animate-[fadeIn_1s_ease-out]">
             <div class="relative w-[110px] h-[110px] mb-5 group">
-                <!-- Imagem de perfil com fallback -->
-                <img src="1000105564.jpg" 
+                <!-- Imagem de perfil atualizada para PNG -->
+                <img src="1000105564.png" 
                      onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=VD&background=0055ff&color=fff&size=200&bold=true';"
                      alt="" 
                      class="w-full h-full object-cover rounded-full border-[3px] border-brand-blue shadow-[0_0_30px_rgba(0,210,255,0.25)] group-hover:border-brand-cyan group-hover:shadow-[0_0_40px_rgba(0,210,255,0.4)] transition-all duration-500">
@@ -301,12 +301,15 @@
                     text: 'Conheça o portfólio, serviços e artes do Victor Draww!',
                     url: window.location.href,
                 }).catch((error) => {
+                    // Ignora erro se o usuário apenas fechou o menu de partilha nativo
                     if (error.name !== 'AbortError') console.log('Erro na partilha', error);
                 });
             } else {
+                // Fallback robusto para copiar o link
                 navigator.clipboard.writeText(window.location.href).then(() => {
                     showToast();
                 }).catch(err => {
+                    // Fallback legado caso Clipboard API falhe
                     const tempInput = document.createElement('input');
                     tempInput.value = window.location.href;
                     document.body.appendChild(tempInput);
