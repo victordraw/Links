@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Victor Draww | Links Oficiais</title>
+    <meta name="description" content="Portfólio, serviços e redes sociais do designer Victor Draww.">
+    
+    <!-- Tailwind CSS para Estilização -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- FontAwesome para Ícones Profissionais -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts (Poppins para um visual moderno e limpo) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Configuração de Cores baseada na Identidade Visual e Redes Sociais -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            dark: '#030712', // Fundo quase preto
+                            cyan: '#00d2ff', // Ciano brilhante do logo
+                            blue: '#0055ff', // Azul profundo do logo
+                        },
+                        social: {
+                            instagram: '#E1306C',
+                            behance: '#1769ff',
+                            youtube: '#FF0000',
+                            shopee: '#ee4d2d',
+                            whatsapp: '#25D366'
+                        }
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <style>
+        /* Estilos base e fundo */
+        body {
+            background-color: #030712;
+            color: #f8fafc;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* Luzes de fundo (Blobs) com as cores da sua marca */
+        .blob {
+            position: absolute;
+            filter: blur(100px);
+            z-index: -1;
+            opacity: 0.35;
+            border-radius: 50%;
+            animation: float 12s infinite ease-in-out alternate;
+        }
+        .blob-1 {
+            top: 0%;
+            left: -10%;
+            width: 350px;
+            height: 350px;
+            background: #00d2ff;
+        }
+        .blob-2 {
+            bottom: 5%;
+            right: -10%;
+            width: 400px;
+            height: 400px;
+            background: #0055ff;
+            animation-delay: -6s;
+        }
+        /* Novo blob central para maior profundidade */
+        .blob-3 {
+            top: 40%;
+            left: 20%;
+            width: 250px;
+            height: 250px;
+            background: rgba(0, 136, 255, 0.5);
+            animation: float 15s infinite ease-in-out alternate-reverse;
+            animation-delay: -3s;
+        }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(40px, 60px) scale(1.15); }
+        }
+
+        /* Animação de entrada em cascata (Staggered Animation) */
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-slide-up {
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            opacity: 0;
+        }
+        
+        /* Efeito Glassmorphism (Vidro) para os botões */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(0, 210, 255, 0.1);
+        }
+
+        /* Degradé personalizado para textos em destaque */
+        .text-gradient {
+            background: linear-gradient(135deg, #00d2ff 0%, #0055ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Customização refinada da scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: rgba(0, 85, 255, 0.5); border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(0, 210, 255, 0.8); }
+    </style>
+</head>
+<body class="min-h-screen relative flex flex-col items-center justify-center p-4 sm:p-6 selection:bg-brand-cyan selection:text-brand-dark">
+
+    <!-- Elementos de Fundo -->
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+
+    <main class="w-full max-w-md mx-auto z-10 py-8 flex flex-col min-h-[90vh]">
+        
+        <!-- Cabeçalho / Perfil -->
+        <header class="text-center mb-10 flex flex-col items-center animate-[fadeIn_1s_ease-out]">
+            <div class="relative w-[110px] h-[110px] mb-5 group">
+                <!-- Imagem de perfil com fallback -->
+                <img src="1000105564.jpg" 
+                     onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=VD&background=0055ff&color=fff&size=200&bold=true';"
+                     alt="" 
+                     class="w-full h-full object-cover rounded-full border-[3px] border-brand-blue shadow-[0_0_30px_rgba(0,210,255,0.25)] group-hover:border-brand-cyan group-hover:shadow-[0_0_40px_rgba(0,210,255,0.4)] transition-all duration-500">
+                
+                <!-- Selo de Verificado Profissional -->
+                <div class="absolute bottom-0 right-0 bg-brand-dark rounded-full p-[3px] flex items-center justify-center w-8 h-8 transform translate-x-1 translate-y-1 hover:scale-110 transition-transform cursor-help" title="Criador Verificado">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-full h-full drop-shadow-[0_0_5px_rgba(0,210,255,0.6)]">
+                        <defs>
+                            <linearGradient id="verifiedGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" stop-color="#00d2ff" />
+                                <stop offset="100%" stop-color="#0055ff" />
+                            </linearGradient>
+                        </defs>
+                        <path d="M10.525.024a2.25 2.25 0 0 1 2.95 0l1.782 1.558a2.25 2.25 0 0 0 1.514.53h2.383a2.25 2.25 0 0 1 2.25 2.25v2.383c0 .546.186 1.071.53 1.514l1.558 1.782a2.25 2.25 0 0 1 0 2.95l-1.558 1.782a2.25 2.25 0 0 0-.53 1.514v2.383a2.25 2.25 0 0 1-2.25 2.25h-2.383a2.25 2.25 0 0 0-1.514.53l-1.782 1.558a2.25 2.25 0 0 1-2.95 0l-1.782-1.558a2.25 2.25 0 0 0-1.514-.53H4.725a2.25 2.25 0 0 1-2.25-2.25v-2.383a2.25 2.25 0 0 0-.53-1.514l-1.558-1.782a2.25 2.25 0 0 1 0-2.95l1.558-1.782a2.25 2.25 0 0 0 .53-1.514V4.362a2.25 2.25 0 0 1 2.25-2.25h2.383a2.25 2.25 0 0 0 1.514-.53L10.525.024Z" fill="url(#verifiedGrad)"/>
+                        <path d="M10.151 15.657a1.5 1.5 0 0 1-2.122 0l-2.434-2.434a1.5 1.5 0 1 1 2.122-2.122l1.373 1.373 4.293-4.293a1.5 1.5 0 0 1 2.122 2.122l-5.354 5.354Z" fill="#ffffff"/>
+                    </svg>
+                </div>
+            </div>
+            
+            <h1 class="text-[22px] font-bold tracking-wide mb-1 text-white">@victordraww</h1>
+            <p class="text-slate-400 text-sm mb-6 font-light tracking-wide">Design, Arte & Criatividade</p>
+            
+            <!-- Redes Sociais no Topo (Com aria-labels para Acessibilidade) -->
+            <div class="flex gap-5 justify-center items-center">
+                <!-- Instagram -->
+                <a href="https://instagram.com/victordraww" target="_blank" rel="noopener noreferrer" aria-label="Visitar Instagram" class="text-social-instagram hover:scale-110 hover:-translate-y-1 transition-all duration-300 drop-shadow-[0_0_5px_rgba(225,48,108,0.5)]">
+                    <i class="fa-brands fa-instagram text-2xl"></i>
+                </a>
+                <!-- Behance -->
+                <a href="https://www.behance.net/victordrawings1" target="_blank" rel="noopener noreferrer" aria-label="Visitar Behance" class="text-white hover:scale-110 hover:-translate-y-1 transition-all duration-300 drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]">
+                    <i class="fa-brands fa-behance text-2xl"></i>
+                </a>
+                <!-- YouTube -->
+                <a href="https://youtube.com/@victordraww?si=9T3v24FHI7UQ9XD0" target="_blank" rel="noopener noreferrer" aria-label="Visitar YouTube" class="text-social-youtube hover:scale-110 hover:-translate-y-1 transition-all duration-300 drop-shadow-[0_0_5px_rgba(255,0,0,0.5)]">
+                    <i class="fa-brands fa-youtube text-2xl"></i>
+                </a>
+                <!-- Shopee -->
+                <a href="https://br.shp.ee/1jSn6j8W" target="_blank" rel="noopener noreferrer" aria-label="Visitar Loja na Shopee" class="text-social-shopee hover:scale-110 hover:-translate-y-1 transition-all duration-300 drop-shadow-[0_0_5px_rgba(238,77,45,0.5)]">
+                    <i class="fa-solid fa-store text-xl"></i>
+                </a>
+                <!-- WhatsApp -->
+                <a href="https://wa.me/556281020265?text=Ol%C3%A1%20Victor!%20Vim%20pelo%20seu%20link%20na%20bio%20e%20gostaria%20de%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer" aria-label="Enviar mensagem no WhatsApp" class="text-social-whatsapp hover:scale-110 hover:-translate-y-1 transition-all duration-300 drop-shadow-[0_0_5px_rgba(37,211,102,0.5)]">
+                    <i class="fa-brands fa-whatsapp text-2xl"></i>
+                </a>
+            </div>
+        </header>
+
+        <!-- Seção de Links -->
+        <section class="space-y-4 w-full flex-1">
+            
+            <!-- 1. Meu portefólio | Designer (Behance) -->
+            <a href="https://www.behance.net/victordrawings1" target="_blank" rel="noopener noreferrer" style="animation-delay: 100ms;" class="animate-slide-up group glass-card flex items-center p-4 rounded-2xl border-social-behance/30 bg-social-behance/5 hover:bg-social-behance/10 hover:border-social-behance/60 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_10px_20px_-10px_rgba(23,105,255,0.4)]">
+                <div class="w-12 h-12 shrink-0 rounded-xl bg-social-behance/20 text-social-behance flex items-center justify-center group-hover:bg-social-behance group-hover:text-white group-hover:scale-110 transition-all duration-300">
+                    <i class="fa-brands fa-behance text-xl"></i>
+                </div>
+                <span class="flex-1 text-center font-medium px-2 text-slate-200 group-hover:text-white transition-colors">Meu Portfólio | Designer</span>
+                <!-- Espaçador invisível para manter o texto 100% centrado -->
+                <div class="w-12 shrink-0"></div>
+            </a>
+
+            <!-- 2. Meu canal | YouTube -->
+            <a href="https://youtube.com/@victordraww?si=9T3v24FHI7UQ9XD0" target="_blank" rel="noopener noreferrer" style="animation-delay: 200ms;" class="animate-slide-up group glass-card flex items-center p-4 rounded-2xl border-social-youtube/30 bg-social-youtube/5 hover:bg-social-youtube/10 hover:border-social-youtube/60 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_10px_20px_-10px_rgba(255,0,0,0.4)]">
+                <div class="w-12 h-12 shrink-0 rounded-xl bg-social-youtube/20 text-social-youtube flex items-center justify-center group-hover:bg-social-youtube group-hover:text-white group-hover:scale-110 transition-all duration-300">
+                    <i class="fa-brands fa-youtube text-xl"></i>
+                </div>
+                <span class="flex-1 text-center font-medium px-2 text-slate-200 group-hover:text-white transition-colors">Meu Canal | YouTube</span>
+                <div class="w-12 shrink-0"></div>
+            </a>
+
+            <!-- 3. Minha loja | Shopee -->
+            <a href="https://br.shp.ee/1jSn6j8W" target="_blank" rel="noopener noreferrer" style="animation-delay: 300ms;" class="animate-slide-up group glass-card flex items-center p-4 rounded-2xl border-social-shopee/30 bg-social-shopee/5 hover:bg-social-shopee/10 hover:border-social-shopee/60 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_10px_20px_-10px_rgba(238,77,45,0.4)]">
+                <div class="w-12 h-12 shrink-0 rounded-xl bg-social-shopee/20 text-social-shopee flex items-center justify-center group-hover:bg-social-shopee group-hover:text-white group-hover:scale-110 transition-all duration-300">
+                    <i class="fa-solid fa-store text-xl"></i>
+                </div>
+                <span class="flex-1 text-center font-medium px-2 text-slate-200 group-hover:text-white transition-colors">Minha Loja | Shopee</span>
+                <div class="w-12 shrink-0"></div>
+            </a>
+            
+            <!-- 4. Orçamentos & Contato (Em breve) -->
+            <div style="animation-delay: 400ms;" class="animate-slide-up group glass-card flex items-center p-4 rounded-2xl opacity-70 border-dashed border-slate-600/40 bg-slate-800/20 select-none">
+                <div class="w-12 h-12 shrink-0 rounded-xl bg-slate-700/50 text-slate-400 flex items-center justify-center">
+                    <i class="fa-solid fa-file-invoice text-xl"></i>
+                </div>
+                <div class="flex-1 flex flex-col items-center px-2">
+                    <span class="font-medium text-center text-slate-400">Orçamentos & Contato</span>
+                    <span class="text-[10px] bg-brand-cyan/10 border border-brand-cyan/20 text-brand-cyan px-2.5 py-0.5 rounded-full mt-1.5 uppercase tracking-wider font-semibold animate-pulse-slow">Em breve</span>
+                </div>
+                <div class="w-12 shrink-0"></div>
+            </div>
+
+            <!-- 5. Meu portefólio | Modelador 3D (Em breve) -->
+            <div style="animation-delay: 500ms;" class="animate-slide-up group glass-card flex items-center p-4 rounded-2xl opacity-70 border-dashed border-slate-600/40 bg-slate-800/20 select-none">
+                <div class="w-12 h-12 shrink-0 rounded-xl bg-slate-700/50 text-slate-400 flex items-center justify-center">
+                    <i class="fa-solid fa-cube text-xl"></i>
+                </div>
+                <div class="flex-1 flex flex-col items-center px-2">
+                    <span class="font-medium text-center text-slate-400">Meu Portfólio | Modelador 3D</span>
+                    <span class="text-[10px] bg-brand-cyan/10 border border-brand-cyan/20 text-brand-cyan px-2.5 py-0.5 rounded-full mt-1.5 uppercase tracking-wider font-semibold animate-pulse-slow">Em breve</span>
+                </div>
+                <div class="w-12 shrink-0"></div>
+            </div>
+
+            <!-- 6. Fale comigo | WhatsApp -->
+            <a href="https://wa.me/556281020265?text=Ol%C3%A1%20Victor!%20Vim%20pelo%20seu%20link%20na%20bio%20e%20gostaria%20de%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer" style="animation-delay: 600ms;" class="animate-slide-up group glass-card flex items-center p-4 rounded-2xl border-social-whatsapp/30 bg-social-whatsapp/5 hover:bg-social-whatsapp/10 hover:border-social-whatsapp/60 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_10px_20px_-10px_rgba(37,211,102,0.4)]">
+                <div class="w-12 h-12 shrink-0 rounded-xl bg-social-whatsapp/20 text-social-whatsapp flex items-center justify-center group-hover:bg-social-whatsapp group-hover:text-white group-hover:scale-110 transition-all duration-300">
+                    <i class="fa-brands fa-whatsapp text-2xl"></i>
+                </div>
+                <span class="flex-1 text-center font-medium px-2 text-slate-200 group-hover:text-white transition-colors">Fale Comigo | WhatsApp</span>
+                <div class="w-12 shrink-0"></div>
+            </a>
+
+        </section>
+
+        <!-- Rodapé -->
+        <footer class="mt-14 text-center pb-4 opacity-0 animate-slide-up" style="animation-delay: 700ms;">
+            <p class="text-[11px] tracking-[0.2em] uppercase text-slate-500 font-medium">
+                © 2026 <span class="text-gradient font-bold ml-1">Victor Draww</span>
+            </p>
+        </footer>
+
+    </main>
+
+    <!-- Botão de Partilha (Fixo) -->
+    <button onclick="shareProfile()" aria-label="Partilhar perfil" class="fixed bottom-6 right-6 w-[52px] h-[52px] glass-card rounded-full flex items-center justify-center hover:bg-brand-cyan/10 hover:border-brand-cyan/60 hover:scale-110 transition-all duration-300 z-50 text-brand-cyan shadow-[0_0_15px_rgba(0,210,255,0.15)] group focus:outline-none focus:ring-2 focus:ring-brand-cyan focus:ring-offset-2 focus:ring-offset-brand-dark">
+        <i class="fa-solid fa-arrow-up-right-from-square group-hover:-mt-1 group-hover:mr-1 transition-all"></i>
+    </button>
+
+    <!-- Notificação Flutuante (Toast) de Link Copiado -->
+    <div id="toast-notification" role="alert" aria-live="polite" class="fixed bottom-24 right-6 glass-card bg-brand-dark/90 border border-brand-cyan/50 text-white px-5 py-3 rounded-xl shadow-[0_10px_30px_rgba(0,210,255,0.2)] transform transition-all duration-300 translate-y-10 opacity-0 pointer-events-none z-50 flex items-center gap-3">
+        <div class="w-8 h-8 rounded-full bg-brand-cyan/20 flex items-center justify-center shrink-0">
+            <i class="fa-solid fa-check text-brand-cyan text-sm"></i>
+        </div>
+        <div class="flex flex-col">
+            <span class="text-[13px] font-semibold text-white leading-tight">Link copiado!</span>
+            <span class="text-[11px] text-slate-400 mt-0.5">Pronto para partilhar.</span>
+        </div>
+    </div>
+
+    <script>
+        // Lógica da notificação Toast (Link copiado)
+        function showToast() {
+            const toast = document.getElementById('toast-notification');
+            toast.classList.remove('translate-y-10', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
+            
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-10', 'opacity-0');
+            }, 3000);
+        }
+
+        // Lógica de Partilha do Perfil
+        function shareProfile() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Victor Draww | Design & Arte',
+                    text: 'Conheça o portfólio, serviços e artes do Victor Draww!',
+                    url: window.location.href,
+                }).catch((error) => {
+                    if (error.name !== 'AbortError') console.log('Erro na partilha', error);
+                });
+            } else {
+                navigator.clipboard.writeText(window.location.href).then(() => {
+                    showToast();
+                }).catch(err => {
+                    const tempInput = document.createElement('input');
+                    tempInput.value = window.location.href;
+                    document.body.appendChild(tempInput);
+                    tempInput.select();
+                    document.execCommand('copy');
+                    document.body.removeChild(tempInput);
+                    showToast();
+                });
+            }
+        }
+    </script>
+</body>
+</html>
