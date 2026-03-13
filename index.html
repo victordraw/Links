@@ -12,8 +12,8 @@
     <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Google Fonts (Space Grotesk para um toque mais Tech + Poppins) -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts (Otimizado: Apenas pesos necessários) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     
     <script>
         tailwind.config = {
@@ -58,22 +58,23 @@
             overscroll-behavior-x: none; /* Evita o "bounce" lateral no iOS/Android */
         }
 
-        /* Textura de Ruído */
+        /* Textura de Ruído (Otimizado: numOctaves='1' para poupar processamento) */
         .noise-bg {
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
             pointer-events: none;
             z-index: -1;
             mix-blend-mode: overlay;
         }
 
-        /* Iluminação Animada Mais Aparente */
+        /* Iluminação Animada Mais Aparente (Otimizado: will-change e translate3d) */
         .soft-glow-1 {
             position: fixed;
             top: -10%; left: -10%; width: 60vw; height: 60vw;
             background: radial-gradient(circle, rgba(0, 210, 255, 0.35) 0%, transparent 70%);
             z-index: -2; pointer-events: none;
+            will-change: transform, opacity;
             animation: floatGlow1 6s ease-in-out infinite alternate;
         }
         
@@ -82,17 +83,19 @@
             bottom: -10%; right: -10%; width: 70vw; height: 70vw;
             background: radial-gradient(circle, rgba(0, 85, 255, 0.35) 0%, transparent 70%);
             z-index: -2; pointer-events: none;
+            will-change: transform, opacity;
             animation: floatGlow2 8s ease-in-out infinite alternate;
         }
 
+        /* Utilização de translate3d para forçar a GPU a processar a animação e não o CPU */
         @keyframes floatGlow1 {
-            0% { transform: translate(0, 0) scale(0.8); opacity: 0.6; }
-            100% { transform: translate(50px, 60px) scale(1.5); opacity: 1; }
+            0% { transform: translate3d(0, 0, 0) scale(0.8); opacity: 0.6; }
+            100% { transform: translate3d(50px, 60px, 0) scale(1.5); opacity: 1; }
         }
 
         @keyframes floatGlow2 {
-            0% { transform: translate(0, 0) scale(0.8); opacity: 0.6; }
-            100% { transform: translate(-50px, -60px) scale(1.5); opacity: 1; }
+            0% { transform: translate3d(0, 0, 0) scale(0.8); opacity: 0.6; }
+            100% { transform: translate3d(-50px, -60px, 0) scale(1.5); opacity: 1; }
         }
 
         /* Painel Principal com Cantos Cortados e Pulso Forte */
@@ -101,6 +104,7 @@
             background: linear-gradient(135deg, rgba(0,210,255,0.8) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0) 70%, rgba(0,85,255,0.8) 100%);
             background-size: 200% 200%;
             clip-path: polygon(40px 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%, 0 40px);
+            transform: translateZ(0); /* Força a criar uma camada na GPU */
             animation: panelPulse 4s ease-in-out infinite alternate;
         }
 
@@ -111,14 +115,14 @@
 
         .cyber-panel {
             background: linear-gradient(145deg, rgba(16, 22, 35, 0.6) 0%, rgba(5, 8, 15, 0.8) 100%);
-            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+            backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); /* Reduzido de 24px para 16px para mais performance */
             clip-path: polygon(40px 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%, 0 40px);
             position: relative;
         }
 
         .cyber-panel::before {
             content: ""; position: absolute; inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='1' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.12'/%3E%3C/svg%3E");
             mix-blend-mode: overlay; pointer-events: none; z-index: 0;
         }
 
@@ -128,12 +132,13 @@
             border: 1px solid rgba(255, 255, 255, 0.05);
             clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
             transition: all 0.3s ease; z-index: 1; cursor: pointer;
+            transform: translateZ(0); /* Aceleração de Hardware */
             animation: btnPulse 3s ease-in-out infinite alternate;
         }
 
         @keyframes btnPulse {
             0% { border-color: rgba(255, 255, 255, 0.05); box-shadow: 0 0 5px rgba(0, 210, 255, 0); }
-            100% { border-color: rgba(0, 210, 255, 0.5); box-shadow: 0 0 20px rgba(0, 210, 255, 0.3), inset 0 0 10px rgba(0, 210, 255, 0.15); }
+            100% { border-color: rgba(0, 210, 255, 0.5); box-shadow: 0 0 15px rgba(0, 210, 255, 0.25), inset 0 0 8px rgba(0, 210, 255, 0.1); } /* Sombras ligeiramente atenuadas */
         }
 
         /* Efeito ao passar o rato (Hover Branco Neutro e Premium) */
@@ -141,7 +146,7 @@
             background: rgba(255, 255, 255, 0.05) !important;
             border-color: rgba(255, 255, 255, 0.6) !important;
             box-shadow: 0 0 25px rgba(255, 255, 255, 0.25), inset 0 0 12px rgba(255, 255, 255, 0.08) !important;
-            transform: scale(1.02);
+            transform: scale(1.02) translateZ(0);
             animation-play-state: paused;
         }
 
@@ -150,7 +155,7 @@
             background: transparent !important;
             border-color: rgba(255, 255, 255, 0.9) !important;
             box-shadow: 0 0 35px rgba(255, 255, 255, 0.4), inset 0 0 15px rgba(255, 255, 255, 0.15) !important;
-            transform: scale(1.02) !important;
+            transform: scale(1.02) translateZ(0) !important;
             animation-play-state: paused !important;
         }
 
@@ -159,7 +164,7 @@
             background: rgba(255, 255, 255, 0.1) !important;
             border-color: rgba(255, 255, 255, 1) !important;
             box-shadow: 0 0 40px rgba(255, 255, 255, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.2) !important;
-            transform: scale(0.96) !important;
+            transform: scale(0.96) translateZ(0) !important;
             transition: all 0.1s ease !important;
         }
 
@@ -171,9 +176,8 @@
 
         @keyframes wppPulse {
             0% { border-color: rgba(37, 211, 102, 0.2); box-shadow: 0 0 5px rgba(37, 211, 102, 0); }
-            100% { border-color: rgba(37, 211, 102, 0.6); box-shadow: 0 0 20px rgba(37, 211, 102, 0.3), inset 0 0 10px rgba(37, 211, 102, 0.15); }
+            100% { border-color: rgba(37, 211, 102, 0.6); box-shadow: 0 0 15px rgba(37, 211, 102, 0.25), inset 0 0 8px rgba(37, 211, 102, 0.1); }
         }
-        /* No hover/active, o WhatsApp flutuante agora herda o brilho Branco da classe base .tech-btn */
 
         ::-webkit-scrollbar { width: 4px; }
         ::-webkit-scrollbar-track { background: #010308; }
@@ -198,17 +202,30 @@
                 <header class="text-center mb-8 flex flex-col items-center w-full relative z-10">
                     <div class="relative w-[100px] h-[100px] mb-5">
                         <div class="absolute inset-0 bg-gradient-to-br from-brand-cyan to-brand-blue rounded-full p-[2px]">
+                            <!-- Otimização: Imagem Lazy Loading -->
                             <img src="1000105564.png" 
+                                loading="lazy"
                                 onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=VD&background=0055ff&color=fff&size=200&bold=true';"
                                 alt="" 
                                 class="w-full h-full object-cover rounded-full border-4 border-[#05080f]">
                         </div>
-                        <div class="absolute bottom-0 right-0 bg-[#05080f] rounded-full p-[2px] flex items-center justify-center w-7 h-7 transform translate-x-1 translate-y-1 z-20">
-                            <i class="fa-solid fa-check text-[10px] text-brand-cyan"></i>
+                        
+                        <!-- Selo de Verificado Realista (Roseta Oficial com Gradiente) -->
+                        <div class="absolute bottom-0 right-0 bg-[#05080f] rounded-full p-[3px] flex items-center justify-center w-8 h-8 transform translate-x-1 translate-y-1 z-20" title="Perfil Verificado">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-full h-full drop-shadow-[0_0_5px_rgba(0,210,255,0.5)]">
+                                <defs>
+                                    <linearGradient id="verifiedGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                        <stop offset="0%" stop-color="#00d2ff" />
+                                        <stop offset="100%" stop-color="#0055ff" />
+                                    </linearGradient>
+                                </defs>
+                                <path d="M10.525.024a2.25 2.25 0 0 1 2.95 0l1.782 1.558a2.25 2.25 0 0 0 1.514.53h2.383a2.25 2.25 0 0 1 2.25 2.25v2.383c0 .546.186 1.071.53 1.514l1.558 1.782a2.25 2.25 0 0 1 0 2.95l-1.558 1.782a2.25 2.25 0 0 0-.53 1.514v2.383a2.25 2.25 0 0 1-2.25 2.25h-2.383a2.25 2.25 0 0 0-1.514.53l-1.782 1.558a2.25 2.25 0 0 1-2.95 0l-1.782-1.558a2.25 2.25 0 0 0-1.514-.53H4.725a2.25 2.25 0 0 1-2.25-2.25v-2.383a2.25 2.25 0 0 0-.53-1.514l-1.558-1.782a2.25 2.25 0 0 1 0-2.95l1.558-1.782a2.25 2.25 0 0 0 .53-1.514V4.362a2.25 2.25 0 0 1 2.25-2.25h2.383a2.25 2.25 0 0 0 1.514-.53L10.525.024Z" fill="url(#verifiedGrad)"/>
+                                <path d="M10.151 15.657a1.5 1.5 0 0 1-2.122 0l-2.434-2.434a1.5 1.5 0 1 1 2.122-2.122l1.373 1.373 4.293-4.293a1.5 1.5 0 0 1 2.122 2.122l-5.354 5.354Z" fill="#ffffff"/>
+                            </svg>
                         </div>
                     </div>
                     
-                    <h1 class="font-tech text-2xl font-bold tracking-widest uppercase mb-1 text-white">@victordraww</h1>
+                    <h1 class="font-tech text-[28px] font-bold tracking-widest uppercase mb-1 text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">Victor Draw</h1>
                     <p class="text-brand-cyan/80 text-xs mb-6 font-tech tracking-[0.15em] uppercase">Design // 3D // Arte</p>
                     
                     <!-- Redes Sociais Rápidas -->
@@ -236,16 +253,13 @@
                     
                     <!-- 1. Behance -->
                     <a href="https://www.behance.net/victordrawings1" target="_blank" rel="noopener noreferrer" style="animation-delay: 0s;" class="tech-link group tech-btn flex items-center p-3.5 w-full">
-                        <!-- BARRA DE PREENCHIMENTO (MANTÉM COR DA MARCA) -->
                         <div class="progress-fill absolute top-0 left-0 bottom-0 w-0 bg-social-behance/50 z-0"></div>
                         
-                        <!-- ÍCONE (MANTÉM COR DA MARCA NO HOVER) -->
                         <div class="relative z-10 w-10 h-10 shrink-0 rounded bg-[#0a0f1c] border border-white/5 text-slate-400 flex items-center justify-center group-hover:text-social-behance group-[.is-loading]:text-social-behance group-hover:border-social-behance/50 group-[.is-loading]:border-social-behance/50 transition-colors duration-300">
                             <i class="fa-brands fa-behance text-lg"></i>
                         </div>
                         <span class="relative z-10 flex-1 text-center font-tech text-sm font-semibold tracking-wide px-2 text-slate-300 group-hover:text-white group-[.is-loading]:text-white transition-colors">MEU PORTFÓLIO <span class="text-brand-cyan/60 font-normal">|</span> DESIGN</span>
                         
-                        <!-- SETA DIREITA (AGORA BRANCA) -->
                         <div class="relative z-10 w-10 shrink-0 flex justify-end text-white/10 group-hover:text-white/60 group-[.is-loading]:text-white transition-colors">
                             <i class="fa-solid fa-angle-right text-xs"></i>
                         </div>
@@ -308,13 +322,11 @@
 
     <!-- Botão Flutuante de WhatsApp -->
     <a href="https://wa.me/556281020265?text=Ol%C3%A1%20Victor!%20Vim%20pelo%20seu%20link%20na%20bio%20e%20gostaria%20de%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer" aria-label="Falar no WhatsApp" class="tech-link tech-btn-whatsapp fixed bottom-6 right-6 w-[56px] h-[56px] bg-[#0a0f1c] border border-social-whatsapp/40 text-social-whatsapp flex items-center justify-center z-50 transition-all duration-300 group" style="clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);">
-        <!-- A barra mantém o verde do WhatsApp -->
         <div class="progress-fill absolute bottom-0 left-0 top-0 w-0 bg-social-whatsapp/50 z-0"></div>
-        <!-- O ícone foi ajustado para manter SEMPRE o verde, mesmo com o botão a brilhar a branco -->
         <i class="fa-brands fa-whatsapp text-3xl drop-shadow-[0_0_8px_currentColor] relative z-10 transition-colors"></i>
     </a>
 
-    <!-- Botão de Partilha Tech (Atualizado para brilhar a branco também) -->
+    <!-- Botão de Partilha Tech -->
     <button onclick="shareProfile()" aria-label="Partilhar perfil" class="fixed bottom-6 left-6 w-[50px] h-[50px] bg-[#05080f] border border-brand-cyan/40 text-brand-cyan flex items-center justify-center hover:bg-white/10 hover:border-white/60 hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300 z-50" style="clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);">
         <i class="fa-solid fa-share-nodes"></i>
     </button>
