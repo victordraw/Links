@@ -2,43 +2,42 @@
 <html lang="pt-PT">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Victor Draww | Links Oficiais</title>
     <meta name="description" content="Portfólio, serviços e redes sociais do designer Victor Draww.">
     
-    <!-- Tailwind CSS para Estilização -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- FontAwesome para Ícones Profissionais -->
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Google Fonts (Poppins para um visual moderno e limpo) -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Google Fonts (Space Grotesk para um toque mais Tech + Poppins) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
     
-    <!-- Configuração de Cores baseada na Identidade Visual e Redes Sociais -->
     <script>
         tailwind.config = {
             theme: {
                 extend: {
                     fontFamily: {
                         sans: ['Poppins', 'sans-serif'],
+                        tech: ['Space Grotesk', 'sans-serif'],
                     },
                     colors: {
                         brand: {
-                            dark: '#030712', // Fundo quase preto
-                            cyan: '#00d2ff', // Ciano brilhante do logo
-                            blue: '#0055ff', // Azul profundo do logo
+                            dark: '#010308',
+                            cyan: '#00d2ff',
+                            blue: '#0055ff',
+                            metal: '#1a2235'
                         },
                         social: {
                             instagram: '#E1306C',
                             behance: '#1769ff',
                             youtube: '#FF0000',
+                            tiktok: '#ff0050',
                             shopee: '#ee4d2d',
                             whatsapp: '#25D366'
                         }
-                    },
-                    animation: {
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                     }
                 }
             }
@@ -46,276 +45,350 @@
     </script>
     
     <style>
-        /* Estilos base e fundo */
-        body {
-            background-color: #030712;
+        /* Base e Prevenção Mobile */
+        html, body {
+            background-color: #010308;
             color: #f8fafc;
             overflow-x: hidden;
+            width: 100%;
+            position: relative;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            touch-action: pan-y; /* Bloqueia zoom (pinça) e scroll lateral nativamente */
+            overscroll-behavior-x: none; /* Evita o "bounce" lateral no iOS/Android */
         }
-        
-        /* Luzes de fundo (Blobs) com as cores da sua marca */
-        .blob {
-            position: absolute;
-            filter: blur(100px);
+
+        /* Textura de Ruído */
+        .noise-bg {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+            pointer-events: none;
             z-index: -1;
-            opacity: 0.35;
-            border-radius: 50%;
-            animation: float 12s infinite ease-in-out alternate;
-        }
-        .blob-1 {
-            top: 0%;
-            left: -10%;
-            width: 350px;
-            height: 350px;
-            background: #00d2ff;
-        }
-        .blob-2 {
-            bottom: 5%;
-            right: -10%;
-            width: 400px;
-            height: 400px;
-            background: #0055ff;
-            animation-delay: -6s;
-        }
-        /* Novo blob central para maior profundidade */
-        .blob-3 {
-            top: 40%;
-            left: 20%;
-            width: 250px;
-            height: 250px;
-            background: rgba(0, 136, 255, 0.5);
-            animation: float 15s infinite ease-in-out alternate-reverse;
-            animation-delay: -3s;
+            mix-blend-mode: overlay;
         }
 
-        @keyframes float {
-            0% { transform: translate(0, 0) scale(1); }
-            100% { transform: translate(40px, 60px) scale(1.15); }
-        }
-
-        /* Animação de entrada em cascata (Staggered Animation) */
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animate-slide-up {
-            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-            opacity: 0;
+        /* Iluminação Animada Mais Aparente */
+        .soft-glow-1 {
+            position: fixed;
+            top: -10%; left: -10%; width: 60vw; height: 60vw;
+            background: radial-gradient(circle, rgba(0, 210, 255, 0.35) 0%, transparent 70%);
+            z-index: -2; pointer-events: none;
+            animation: floatGlow1 6s ease-in-out infinite alternate;
         }
         
-        /* Efeito Glassmorphism (Vidro) para os botões */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(0, 210, 255, 0.1);
+        .soft-glow-2 {
+            position: fixed;
+            bottom: -10%; right: -10%; width: 70vw; height: 70vw;
+            background: radial-gradient(circle, rgba(0, 85, 255, 0.35) 0%, transparent 70%);
+            z-index: -2; pointer-events: none;
+            animation: floatGlow2 8s ease-in-out infinite alternate;
         }
 
-        /* Degradé personalizado para textos em destaque */
-        .text-gradient {
-            background: linear-gradient(135deg, #00d2ff 0%, #0055ff 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        @keyframes floatGlow1 {
+            0% { transform: translate(0, 0) scale(0.8); opacity: 0.6; }
+            100% { transform: translate(50px, 60px) scale(1.5); opacity: 1; }
         }
-        
-        /* Customização refinada da scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: rgba(0, 85, 255, 0.5); border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: rgba(0, 210, 255, 0.8); }
+
+        @keyframes floatGlow2 {
+            0% { transform: translate(0, 0) scale(0.8); opacity: 0.6; }
+            100% { transform: translate(-50px, -60px) scale(1.5); opacity: 1; }
+        }
+
+        /* Painel Principal com Cantos Cortados e Pulso Forte */
+        .cyber-wrapper {
+            position: relative; padding: 1px;
+            background: linear-gradient(135deg, rgba(0,210,255,0.8) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0) 70%, rgba(0,85,255,0.8) 100%);
+            background-size: 200% 200%;
+            clip-path: polygon(40px 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%, 0 40px);
+            animation: panelPulse 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes panelPulse {
+            0% { box-shadow: 0 0 20px rgba(0, 85, 255, 0.2); background-position: 0% 50%; }
+            100% { box-shadow: 0 0 70px rgba(0, 210, 255, 0.6); background-position: 100% 50%; }
+        }
+
+        .cyber-panel {
+            background: linear-gradient(145deg, rgba(16, 22, 35, 0.6) 0%, rgba(5, 8, 15, 0.8) 100%);
+            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
+            clip-path: polygon(40px 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%, 0 40px);
+            position: relative;
+        }
+
+        .cyber-panel::before {
+            content: ""; position: absolute; inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
+            mix-blend-mode: overlay; pointer-events: none; z-index: 0;
+        }
+
+        /* Botões Estilo Tech com Respiração */
+        .tech-btn {
+            position: relative; background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+            transition: all 0.3s ease; z-index: 1; cursor: pointer;
+            animation: btnPulse 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes btnPulse {
+            0% { border-color: rgba(255, 255, 255, 0.05); box-shadow: 0 0 5px rgba(0, 210, 255, 0); }
+            100% { border-color: rgba(0, 210, 255, 0.5); box-shadow: 0 0 20px rgba(0, 210, 255, 0.3), inset 0 0 10px rgba(0, 210, 255, 0.15); }
+        }
+
+        /* Efeito ao passar o rato (Hover Branco Neutro e Premium) */
+        .tech-btn:hover {
+            background: rgba(255, 255, 255, 0.05) !important;
+            border-color: rgba(255, 255, 255, 0.6) !important;
+            box-shadow: 0 0 25px rgba(255, 255, 255, 0.25), inset 0 0 12px rgba(255, 255, 255, 0.08) !important;
+            transform: scale(1.02);
+            animation-play-state: paused;
+        }
+
+        /* Estado "Carregando/Loading" ao clicar no botão (Brilho Branco Intenso) */
+        .tech-btn.is-loading {
+            background: transparent !important;
+            border-color: rgba(255, 255, 255, 0.9) !important;
+            box-shadow: 0 0 35px rgba(255, 255, 255, 0.4), inset 0 0 15px rgba(255, 255, 255, 0.15) !important;
+            transform: scale(1.02) !important;
+            animation-play-state: paused !important;
+        }
+
+        /* Efeito tátil muito rápido (Active em Branco) */
+        .tech-btn:active {
+            background: rgba(255, 255, 255, 0.1) !important;
+            border-color: rgba(255, 255, 255, 1) !important;
+            box-shadow: 0 0 40px rgba(255, 255, 255, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.2) !important;
+            transform: scale(0.96) !important;
+            transition: all 0.1s ease !important;
+        }
+
+        /* Desativar pulso para os botões desligados */
+        .tech-btn.opacity-60 { animation: none; box-shadow: none; }
+
+        /* Respiração específica para o WhatsApp (Verde Neon quando inativo) */
+        .tech-btn-whatsapp { animation: wppPulse 3s ease-in-out infinite alternate; }
+
+        @keyframes wppPulse {
+            0% { border-color: rgba(37, 211, 102, 0.2); box-shadow: 0 0 5px rgba(37, 211, 102, 0); }
+            100% { border-color: rgba(37, 211, 102, 0.6); box-shadow: 0 0 20px rgba(37, 211, 102, 0.3), inset 0 0 10px rgba(37, 211, 102, 0.15); }
+        }
+        /* No hover/active, o WhatsApp flutuante agora herda o brilho Branco da classe base .tech-btn */
+
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #010308; }
+        ::-webkit-scrollbar-thumb { background: #0055ff; }
+        ::-webkit-scrollbar-thumb:hover { background: #00d2ff; }
     </style>
 </head>
-<body class="min-h-screen relative flex flex-col items-center justify-center p-4 sm:p-6 selection:bg-brand-cyan selection:text-brand-dark">
+<body class="min-h-screen relative flex flex-col items-center p-4 sm:p-6 selection:bg-brand-cyan selection:text-brand-dark">
 
-    <!-- Elementos de Fundo -->
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-    <div class="blob blob-3"></div>
+    <!-- Efeitos de Fundo Suaves e Estáticos -->
+    <div class="soft-glow-1"></div>
+    <div class="soft-glow-2"></div>
+    <div class="noise-bg"></div>
 
-    <main class="w-full max-w-md mx-auto z-10 py-8 flex flex-col min-h-[90vh]">
+    <main class="w-full max-w-md mx-auto z-10 py-6 flex flex-col min-h-[90vh]">
         
-        <!-- Cabeçalho / Perfil -->
-        <header class="text-center mb-10 flex flex-col items-center animate-[fadeIn_1s_ease-out]">
-            <div class="relative w-[110px] h-[110px] mb-5 group">
-                <!-- Imagem de perfil atualizada para PNG -->
-                <img src="1000105564.png" 
-                     onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=VD&background=0055ff&color=fff&size=200&bold=true';"
-                     alt="" 
-                     class="w-full h-full object-cover rounded-full border-[3px] border-brand-blue shadow-[0_0_30px_rgba(0,210,255,0.25)] group-hover:border-brand-cyan group-hover:shadow-[0_0_40px_rgba(0,210,255,0.4)] transition-all duration-500">
+        <!-- WRAPPER CYBERPUNK -->
+        <div class="cyber-wrapper">
+            <div class="cyber-panel px-6 py-10 w-full flex flex-col items-center">
                 
-                <!-- Selo de Verificado Profissional -->
-                <div class="absolute bottom-0 right-0 bg-brand-dark rounded-full p-[3px] flex items-center justify-center w-8 h-8 transform translate-x-1 translate-y-1 hover:scale-110 transition-transform cursor-help" title="Criador Verificado">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" class="w-full h-full drop-shadow-[0_0_5px_rgba(0,210,255,0.6)]">
-                        <defs>
-                            <linearGradient id="verifiedGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" stop-color="#00d2ff" />
-                                <stop offset="100%" stop-color="#0055ff" />
-                            </linearGradient>
-                        </defs>
-                        <path d="M10.525.024a2.25 2.25 0 0 1 2.95 0l1.782 1.558a2.25 2.25 0 0 0 1.514.53h2.383a2.25 2.25 0 0 1 2.25 2.25v2.383c0 .546.186 1.071.53 1.514l1.558 1.782a2.25 2.25 0 0 1 0 2.95l-1.558 1.782a2.25 2.25 0 0 0-.53 1.514v2.383a2.25 2.25 0 0 1-2.25 2.25h-2.383a2.25 2.25 0 0 0-1.514.53l-1.782 1.558a2.25 2.25 0 0 1-2.95 0l-1.782-1.558a2.25 2.25 0 0 0-1.514-.53H4.725a2.25 2.25 0 0 1-2.25-2.25v-2.383a2.25 2.25 0 0 0-.53-1.514l-1.558-1.782a2.25 2.25 0 0 1 0-2.95l1.558-1.782a2.25 2.25 0 0 0 .53-1.514V4.362a2.25 2.25 0 0 1 2.25-2.25h2.383a2.25 2.25 0 0 0 1.514-.53L10.525.024Z" fill="url(#verifiedGrad)"/>
-                        <path d="M10.151 15.657a1.5 1.5 0 0 1-2.122 0l-2.434-2.434a1.5 1.5 0 1 1 2.122-2.122l1.373 1.373 4.293-4.293a1.5 1.5 0 0 1 2.122 2.122l-5.354 5.354Z" fill="#ffffff"/>
-                    </svg>
-                </div>
+                <!-- Cabeçalho / Perfil -->
+                <header class="text-center mb-8 flex flex-col items-center w-full relative z-10">
+                    <div class="relative w-[100px] h-[100px] mb-5">
+                        <div class="absolute inset-0 bg-gradient-to-br from-brand-cyan to-brand-blue rounded-full p-[2px]">
+                            <img src="1000105564.png" 
+                                onerror="this.onerror=null; this.src='https://ui-avatars.com/api/?name=VD&background=0055ff&color=fff&size=200&bold=true';"
+                                alt="" 
+                                class="w-full h-full object-cover rounded-full border-4 border-[#05080f]">
+                        </div>
+                        <div class="absolute bottom-0 right-0 bg-[#05080f] rounded-full p-[2px] flex items-center justify-center w-7 h-7 transform translate-x-1 translate-y-1 z-20">
+                            <i class="fa-solid fa-check text-[10px] text-brand-cyan"></i>
+                        </div>
+                    </div>
+                    
+                    <h1 class="font-tech text-2xl font-bold tracking-widest uppercase mb-1 text-white">@victordraww</h1>
+                    <p class="text-brand-cyan/80 text-xs mb-6 font-tech tracking-[0.15em] uppercase">Design // 3D // Arte</p>
+                    
+                    <!-- Redes Sociais Rápidas -->
+                    <div class="flex gap-4 justify-center items-center w-full border-b border-white/10 pb-6">
+                        <a href="https://instagram.com/victordraww" target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="text-slate-400 hover:text-social-instagram transition-colors duration-300">
+                            <i class="fa-brands fa-instagram text-[22px]"></i>
+                        </a>
+                        <a href="https://www.behance.net/victordrawings1" target="_blank" rel="noopener noreferrer" aria-label="Behance" class="text-slate-400 hover:text-white transition-colors duration-300">
+                            <i class="fa-brands fa-behance text-[22px]"></i>
+                        </a>
+                        <a href="https://youtube.com/@victordraww?si=9T3v24FHI7UQ9XD0" target="_blank" rel="noopener noreferrer" aria-label="YouTube" class="text-slate-400 hover:text-social-youtube transition-colors duration-300">
+                            <i class="fa-brands fa-youtube text-[22px]"></i>
+                        </a>
+                        <a href="https://www.tiktok.com/@victordraw.w" target="_blank" rel="noopener noreferrer" aria-label="TikTok" class="text-slate-400 hover:text-social-tiktok transition-colors duration-300">
+                            <i class="fa-brands fa-tiktok text-[20px]"></i>
+                        </a>
+                        <a href="https://br.shp.ee/1jSn6j8W" target="_blank" rel="noopener noreferrer" aria-label="Shopee" class="text-slate-400 hover:text-social-shopee transition-colors duration-300">
+                            <i class="fa-solid fa-store text-[18px]"></i>
+                        </a>
+                    </div>
+                </header>
+
+                <!-- Seção de Links -->
+                <section class="space-y-3 w-full relative z-10">
+                    
+                    <!-- 1. Behance -->
+                    <a href="https://www.behance.net/victordrawings1" target="_blank" rel="noopener noreferrer" style="animation-delay: 0s;" class="tech-link group tech-btn flex items-center p-3.5 w-full">
+                        <!-- BARRA DE PREENCHIMENTO (MANTÉM COR DA MARCA) -->
+                        <div class="progress-fill absolute top-0 left-0 bottom-0 w-0 bg-social-behance/50 z-0"></div>
+                        
+                        <!-- ÍCONE (MANTÉM COR DA MARCA NO HOVER) -->
+                        <div class="relative z-10 w-10 h-10 shrink-0 rounded bg-[#0a0f1c] border border-white/5 text-slate-400 flex items-center justify-center group-hover:text-social-behance group-[.is-loading]:text-social-behance group-hover:border-social-behance/50 group-[.is-loading]:border-social-behance/50 transition-colors duration-300">
+                            <i class="fa-brands fa-behance text-lg"></i>
+                        </div>
+                        <span class="relative z-10 flex-1 text-center font-tech text-sm font-semibold tracking-wide px-2 text-slate-300 group-hover:text-white group-[.is-loading]:text-white transition-colors">MEU PORTFÓLIO <span class="text-brand-cyan/60 font-normal">|</span> DESIGN</span>
+                        
+                        <!-- SETA DIREITA (AGORA BRANCA) -->
+                        <div class="relative z-10 w-10 shrink-0 flex justify-end text-white/10 group-hover:text-white/60 group-[.is-loading]:text-white transition-colors">
+                            <i class="fa-solid fa-angle-right text-xs"></i>
+                        </div>
+                    </a>
+
+                    <!-- 2. YouTube -->
+                    <a href="https://youtube.com/@victordraww?si=9T3v24FHI7UQ9XD0" target="_blank" rel="noopener noreferrer" style="animation-delay: 0.6s;" class="tech-link group tech-btn flex items-center p-3.5 w-full">
+                        <div class="progress-fill absolute top-0 left-0 bottom-0 w-0 bg-social-youtube/50 z-0"></div>
+                        
+                        <div class="relative z-10 w-10 h-10 shrink-0 rounded bg-[#0a0f1c] border border-white/5 text-slate-400 flex items-center justify-center group-hover:text-social-youtube group-[.is-loading]:text-social-youtube group-hover:border-social-youtube/50 group-[.is-loading]:border-social-youtube/50 transition-colors duration-300">
+                            <i class="fa-brands fa-youtube text-lg"></i>
+                        </div>
+                        <span class="relative z-10 flex-1 text-center font-tech text-sm font-semibold tracking-wide px-2 text-slate-300 group-hover:text-white group-[.is-loading]:text-white transition-colors">MEU CANAL <span class="text-brand-cyan/60 font-normal">|</span> YOUTUBE</span>
+                        
+                        <div class="relative z-10 w-10 shrink-0 flex justify-end text-white/10 group-hover:text-white/60 group-[.is-loading]:text-white transition-colors">
+                            <i class="fa-solid fa-angle-right text-xs"></i>
+                        </div>
+                    </a>
+
+                    <!-- 3. TikTok -->
+                    <a href="https://www.tiktok.com/@victordraw.w" target="_blank" rel="noopener noreferrer" style="animation-delay: 1.2s;" class="tech-link group tech-btn flex items-center p-3.5 w-full">
+                        <div class="progress-fill absolute top-0 left-0 bottom-0 w-0 bg-social-tiktok/50 z-0"></div>
+                        
+                        <div class="relative z-10 w-10 h-10 shrink-0 rounded bg-[#0a0f1c] border border-white/5 text-slate-400 flex items-center justify-center group-hover:text-social-tiktok group-[.is-loading]:text-social-tiktok group-hover:border-social-tiktok/50 group-[.is-loading]:border-social-tiktok/50 transition-colors duration-300">
+                            <i class="fa-brands fa-tiktok text-lg"></i>
+                        </div>
+                        <span class="relative z-10 flex-1 text-center font-tech text-sm font-semibold tracking-wide px-2 text-slate-300 group-hover:text-white group-[.is-loading]:text-white transition-colors">MEU TIKTOK <span class="text-brand-cyan/60 font-normal">|</span> VÍDEOS</span>
+                        
+                        <div class="relative z-10 w-10 shrink-0 flex justify-end text-white/10 group-hover:text-white/60 group-[.is-loading]:text-white transition-colors">
+                            <i class="fa-solid fa-angle-right text-xs"></i>
+                        </div>
+                    </a>
+
+                    <!-- 4. Shopee -->
+                    <a href="https://br.shp.ee/1jSn6j8W" target="_blank" rel="noopener noreferrer" style="animation-delay: 1.8s;" class="tech-link group tech-btn flex items-center p-3.5 w-full">
+                        <div class="progress-fill absolute top-0 left-0 bottom-0 w-0 bg-social-shopee/50 z-0"></div>
+                        
+                        <div class="relative z-10 w-10 h-10 shrink-0 rounded bg-[#0a0f1c] border border-white/5 text-slate-400 flex items-center justify-center group-hover:text-social-shopee group-[.is-loading]:text-social-shopee group-hover:border-social-shopee/50 group-[.is-loading]:border-social-shopee/50 transition-colors duration-300">
+                            <i class="fa-solid fa-store text-lg"></i>
+                        </div>
+                        <span class="relative z-10 flex-1 text-center font-tech text-sm font-semibold tracking-wide px-2 text-slate-300 group-hover:text-white group-[.is-loading]:text-white transition-colors">MINHA LOJA <span class="text-brand-cyan/60 font-normal">|</span> SHOPEE</span>
+                        
+                        <div class="relative z-10 w-10 shrink-0 flex justify-end text-white/10 group-hover:text-white/60 group-[.is-loading]:text-white transition-colors">
+                            <i class="fa-solid fa-angle-right text-xs"></i>
+                        </div>
+                    </a>
+
+                </section>
             </div>
-            
-            <h1 class="text-[22px] font-bold tracking-wide mb-1 text-white">@victordraww</h1>
-            <p class="text-slate-400 text-sm mb-6 font-light tracking-wide">Design, Arte & Criatividade</p>
-            
-            <!-- Redes Sociais no Topo (Com aria-labels para Acessibilidade) -->
-            <div class="flex gap-5 justify-center items-center">
-                <!-- Instagram -->
-                <a href="https://instagram.com/victordraww" target="_blank" rel="noopener noreferrer" aria-label="Visitar Instagram" class="text-social-instagram hover:scale-110 hover:-translate-y-1 transition-all duration-300 drop-shadow-[0_0_5px_rgba(225,48,108,0.5)]">
-                    <i class="fa-brands fa-instagram text-2xl"></i>
-                </a>
-                <!-- Behance -->
-                <a href="https://www.behance.net/victordrawings1" target="_blank" rel="noopener noreferrer" aria-label="Visitar Behance" class="text-white hover:scale-110 hover:-translate-y-1 transition-all duration-300 drop-shadow-[0_0_5px_rgba(255,255,255,0.5)]">
-                    <i class="fa-brands fa-behance text-2xl"></i>
-                </a>
-                <!-- YouTube -->
-                <a href="https://youtube.com/@victordraww?si=9T3v24FHI7UQ9XD0" target="_blank" rel="noopener noreferrer" aria-label="Visitar YouTube" class="text-social-youtube hover:scale-110 hover:-translate-y-1 transition-all duration-300 drop-shadow-[0_0_5px_rgba(255,0,0,0.5)]">
-                    <i class="fa-brands fa-youtube text-2xl"></i>
-                </a>
-                <!-- Shopee -->
-                <a href="https://br.shp.ee/1jSn6j8W" target="_blank" rel="noopener noreferrer" aria-label="Visitar Loja na Shopee" class="text-social-shopee hover:scale-110 hover:-translate-y-1 transition-all duration-300 drop-shadow-[0_0_5px_rgba(238,77,45,0.5)]">
-                    <i class="fa-solid fa-store text-xl"></i>
-                </a>
-                <!-- WhatsApp -->
-                <a href="https://wa.me/556281020265?text=Ol%C3%A1%20Victor!%20Vim%20pelo%20seu%20link%20na%20bio%20e%20gostaria%20de%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer" aria-label="Enviar mensagem no WhatsApp" class="text-social-whatsapp hover:scale-110 hover:-translate-y-1 transition-all duration-300 drop-shadow-[0_0_5px_rgba(37,211,102,0.5)]">
-                    <i class="fa-brands fa-whatsapp text-2xl"></i>
-                </a>
-            </div>
-        </header>
+        </div>
 
-        <!-- Seção de Links -->
-        <section class="space-y-4 w-full flex-1">
-            
-            <!-- 1. Meu portefólio | Designer (Behance) -->
-            <a href="https://www.behance.net/victordrawings1" target="_blank" rel="noopener noreferrer" style="animation-delay: 100ms;" class="animate-slide-up group glass-card flex items-center p-4 rounded-2xl border-social-behance/30 bg-social-behance/5 hover:bg-social-behance/10 hover:border-social-behance/60 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_10px_20px_-10px_rgba(23,105,255,0.4)]">
-                <div class="w-12 h-12 shrink-0 rounded-xl bg-social-behance/20 text-social-behance flex items-center justify-center group-hover:bg-social-behance group-hover:text-white group-hover:scale-110 transition-all duration-300">
-                    <i class="fa-brands fa-behance text-xl"></i>
-                </div>
-                <span class="flex-1 text-center font-medium px-2 text-slate-200 group-hover:text-white transition-colors">Meu Portfólio | Designer</span>
-                <!-- Espaçador invisível para manter o texto 100% centrado -->
-                <div class="w-12 shrink-0"></div>
-            </a>
-
-            <!-- 2. Meu canal | YouTube -->
-            <a href="https://youtube.com/@victordraww?si=9T3v24FHI7UQ9XD0" target="_blank" rel="noopener noreferrer" style="animation-delay: 200ms;" class="animate-slide-up group glass-card flex items-center p-4 rounded-2xl border-social-youtube/30 bg-social-youtube/5 hover:bg-social-youtube/10 hover:border-social-youtube/60 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_10px_20px_-10px_rgba(255,0,0,0.4)]">
-                <div class="w-12 h-12 shrink-0 rounded-xl bg-social-youtube/20 text-social-youtube flex items-center justify-center group-hover:bg-social-youtube group-hover:text-white group-hover:scale-110 transition-all duration-300">
-                    <i class="fa-brands fa-youtube text-xl"></i>
-                </div>
-                <span class="flex-1 text-center font-medium px-2 text-slate-200 group-hover:text-white transition-colors">Meu Canal | YouTube</span>
-                <div class="w-12 shrink-0"></div>
-            </a>
-
-            <!-- 3. Minha loja | Shopee -->
-            <a href="https://br.shp.ee/1jSn6j8W" target="_blank" rel="noopener noreferrer" style="animation-delay: 300ms;" class="animate-slide-up group glass-card flex items-center p-4 rounded-2xl border-social-shopee/30 bg-social-shopee/5 hover:bg-social-shopee/10 hover:border-social-shopee/60 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_10px_20px_-10px_rgba(238,77,45,0.4)]">
-                <div class="w-12 h-12 shrink-0 rounded-xl bg-social-shopee/20 text-social-shopee flex items-center justify-center group-hover:bg-social-shopee group-hover:text-white group-hover:scale-110 transition-all duration-300">
-                    <i class="fa-solid fa-store text-xl"></i>
-                </div>
-                <span class="flex-1 text-center font-medium px-2 text-slate-200 group-hover:text-white transition-colors">Minha Loja | Shopee</span>
-                <div class="w-12 shrink-0"></div>
-            </a>
-            
-            <!-- 4. Orçamentos & Contato (Em breve) -->
-            <div style="animation-delay: 400ms;" class="animate-slide-up group glass-card flex items-center p-4 rounded-2xl opacity-70 border-dashed border-slate-600/40 bg-slate-800/20 select-none">
-                <div class="w-12 h-12 shrink-0 rounded-xl bg-slate-700/50 text-slate-400 flex items-center justify-center">
-                    <i class="fa-solid fa-file-invoice text-xl"></i>
-                </div>
-                <div class="flex-1 flex flex-col items-center px-2">
-                    <span class="font-medium text-center text-slate-400">Orçamentos & Contato</span>
-                    <span class="text-[10px] bg-brand-cyan/10 border border-brand-cyan/20 text-brand-cyan px-2.5 py-0.5 rounded-full mt-1.5 uppercase tracking-wider font-semibold animate-pulse-slow">Em breve</span>
-                </div>
-                <div class="w-12 shrink-0"></div>
-            </div>
-
-            <!-- 5. Meu portefólio | Modelador 3D (Em breve) -->
-            <div style="animation-delay: 500ms;" class="animate-slide-up group glass-card flex items-center p-4 rounded-2xl opacity-70 border-dashed border-slate-600/40 bg-slate-800/20 select-none">
-                <div class="w-12 h-12 shrink-0 rounded-xl bg-slate-700/50 text-slate-400 flex items-center justify-center">
-                    <i class="fa-solid fa-cube text-xl"></i>
-                </div>
-                <div class="flex-1 flex flex-col items-center px-2">
-                    <span class="font-medium text-center text-slate-400">Meu Portfólio | Modelador 3D</span>
-                    <span class="text-[10px] bg-brand-cyan/10 border border-brand-cyan/20 text-brand-cyan px-2.5 py-0.5 rounded-full mt-1.5 uppercase tracking-wider font-semibold animate-pulse-slow">Em breve</span>
-                </div>
-                <div class="w-12 shrink-0"></div>
-            </div>
-
-            <!-- 6. Fale comigo | WhatsApp -->
-            <a href="https://wa.me/556281020265?text=Ol%C3%A1%20Victor!%20Vim%20pelo%20seu%20link%20na%20bio%20e%20gostaria%20de%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer" style="animation-delay: 600ms;" class="animate-slide-up group glass-card flex items-center p-4 rounded-2xl border-social-whatsapp/30 bg-social-whatsapp/5 hover:bg-social-whatsapp/10 hover:border-social-whatsapp/60 transition-all duration-300 transform hover:-translate-y-1 hover:shadow-[0_10px_20px_-10px_rgba(37,211,102,0.4)]">
-                <div class="w-12 h-12 shrink-0 rounded-xl bg-social-whatsapp/20 text-social-whatsapp flex items-center justify-center group-hover:bg-social-whatsapp group-hover:text-white group-hover:scale-110 transition-all duration-300">
-                    <i class="fa-brands fa-whatsapp text-2xl"></i>
-                </div>
-                <span class="flex-1 text-center font-medium px-2 text-slate-200 group-hover:text-white transition-colors">Fale Comigo | WhatsApp</span>
-                <div class="w-12 shrink-0"></div>
-            </a>
-
-        </section>
-
-        <!-- Rodapé -->
-        <footer class="mt-14 text-center pb-4 opacity-0 animate-slide-up" style="animation-delay: 700ms;">
-            <p class="text-[11px] tracking-[0.2em] uppercase text-slate-500 font-medium">
-                © 2026 <span class="text-gradient font-bold ml-1">Victor Draww</span>
+        <!-- Rodapé Minimalista -->
+        <footer class="mt-8 text-center pb-4">
+            <p class="text-[10px] font-tech tracking-[0.3em] text-slate-500">
+                SYS. 2026 // <span class="text-brand-cyan">VICTOR DRAWW</span>
             </p>
         </footer>
 
     </main>
 
-    <!-- Botão de Partilha (Fixo) -->
-    <button onclick="shareProfile()" aria-label="Partilhar perfil" class="fixed bottom-6 right-6 w-[52px] h-[52px] glass-card rounded-full flex items-center justify-center hover:bg-brand-cyan/10 hover:border-brand-cyan/60 hover:scale-110 transition-all duration-300 z-50 text-brand-cyan shadow-[0_0_15px_rgba(0,210,255,0.15)] group focus:outline-none focus:ring-2 focus:ring-brand-cyan focus:ring-offset-2 focus:ring-offset-brand-dark">
-        <i class="fa-solid fa-arrow-up-right-from-square group-hover:-mt-1 group-hover:mr-1 transition-all"></i>
+    <!-- Botão Flutuante de WhatsApp -->
+    <a href="https://wa.me/556281020265?text=Ol%C3%A1%20Victor!%20Vim%20pelo%20seu%20link%20na%20bio%20e%20gostaria%20de%20falar%20sobre%20um%20projeto." target="_blank" rel="noopener noreferrer" aria-label="Falar no WhatsApp" class="tech-link tech-btn-whatsapp fixed bottom-6 right-6 w-[56px] h-[56px] bg-[#0a0f1c] border border-social-whatsapp/40 text-social-whatsapp flex items-center justify-center z-50 transition-all duration-300 group" style="clip-path: polygon(12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%, 0 12px);">
+        <!-- A barra mantém o verde do WhatsApp -->
+        <div class="progress-fill absolute bottom-0 left-0 top-0 w-0 bg-social-whatsapp/50 z-0"></div>
+        <!-- O ícone foi ajustado para manter SEMPRE o verde, mesmo com o botão a brilhar a branco -->
+        <i class="fa-brands fa-whatsapp text-3xl drop-shadow-[0_0_8px_currentColor] relative z-10 transition-colors"></i>
+    </a>
+
+    <!-- Botão de Partilha Tech (Atualizado para brilhar a branco também) -->
+    <button onclick="shareProfile()" aria-label="Partilhar perfil" class="fixed bottom-6 left-6 w-[50px] h-[50px] bg-[#05080f] border border-brand-cyan/40 text-brand-cyan flex items-center justify-center hover:bg-white/10 hover:border-white/60 hover:text-white hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] transition-all duration-300 z-50" style="clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);">
+        <i class="fa-solid fa-share-nodes"></i>
     </button>
 
-    <!-- Notificação Flutuante (Toast) de Link Copiado -->
-    <div id="toast-notification" role="alert" aria-live="polite" class="fixed bottom-24 right-6 glass-card bg-brand-dark/90 border border-brand-cyan/50 text-white px-5 py-3 rounded-xl shadow-[0_10px_30px_rgba(0,210,255,0.2)] transform transition-all duration-300 translate-y-10 opacity-0 pointer-events-none z-50 flex items-center gap-3">
-        <div class="w-8 h-8 rounded-full bg-brand-cyan/20 flex items-center justify-center shrink-0">
-            <i class="fa-solid fa-check text-brand-cyan text-sm"></i>
-        </div>
-        <div class="flex flex-col">
-            <span class="text-[13px] font-semibold text-white leading-tight">Link copiado!</span>
-            <span class="text-[11px] text-slate-400 mt-0.5">Pronto para partilhar.</span>
-        </div>
+    <!-- Notificação Flutuante (Toast) -->
+    <div id="toast-notification" role="alert" class="fixed bottom-24 left-6 bg-[#05080f] border border-brand-cyan/50 text-white px-4 py-3 shadow-[0_0_20px_rgba(0,210,255,0.15)] transform transition-all duration-300 translate-y-10 opacity-0 pointer-events-none z-50 flex items-center gap-3" style="clip-path: polygon(8px 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%, 0 8px);">
+        <i class="fa-solid fa-satellite-dish text-brand-cyan"></i>
+        <span class="text-[12px] font-tech font-semibold tracking-wide">LINK TRANSMITIDO</span>
     </div>
 
+    <!-- SCRIPT DE AÇÃO (Lógica da Barra de Progresso em 1s) -->
     <script>
-        // Lógica da notificação Toast (Link copiado)
+        document.addEventListener('DOMContentLoaded', () => {
+            const techLinks = document.querySelectorAll('.tech-link');
+            
+            techLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    if(this.classList.contains('is-loading')) return;
+                    
+                    this.classList.add('is-loading');
+                    
+                    const fill = this.querySelector('.progress-fill');
+                    if (fill) {
+                        fill.style.transition = 'width 1s linear'; 
+                        void fill.offsetWidth;
+                        fill.style.width = '100%';
+                    }
+
+                    setTimeout(() => {
+                        const target = this.getAttribute('target');
+                        const url = this.getAttribute('href');
+                        
+                        if (target === '_blank') {
+                            window.open(url, '_blank');
+                        } else {
+                            window.location.href = url;
+                        }
+                        
+                        setTimeout(() => {
+                            this.classList.remove('is-loading');
+                            if (fill) {
+                                fill.style.transition = 'none';
+                                fill.style.width = '0';
+                            }
+                        }, 500);
+                        
+                    }, 1000);
+                });
+            });
+        });
+
+        // Funções de Partilha
         function showToast() {
             const toast = document.getElementById('toast-notification');
             toast.classList.remove('translate-y-10', 'opacity-0');
             toast.classList.add('translate-y-0', 'opacity-100');
-            
             setTimeout(() => {
                 toast.classList.remove('translate-y-0', 'opacity-100');
                 toast.classList.add('translate-y-10', 'opacity-0');
             }, 3000);
         }
 
-        // Lógica de Partilha do Perfil
         function shareProfile() {
             if (navigator.share) {
                 navigator.share({
-                    title: 'Victor Draww | Design & Arte',
-                    text: 'Conheça o portfólio, serviços e artes do Victor Draww!',
+                    title: 'Victor Draww | Design & 3D',
+                    text: 'Acesso ao sistema de portfólio de Victor Draww.',
                     url: window.location.href,
                 }).catch((error) => {
-                    // Ignora erro se o usuário apenas fechou o menu de partilha nativo
-                    if (error.name !== 'AbortError') console.log('Erro na partilha', error);
+                    if (error.name !== 'AbortError') console.log('Erro', error);
                 });
             } else {
-                // Fallback robusto para copiar o link
                 navigator.clipboard.writeText(window.location.href).then(() => {
-                    showToast();
-                }).catch(err => {
-                    // Fallback legado caso Clipboard API falhe
-                    const tempInput = document.createElement('input');
-                    tempInput.value = window.location.href;
-                    document.body.appendChild(tempInput);
-                    tempInput.select();
-                    document.execCommand('copy');
-                    document.body.removeChild(tempInput);
                     showToast();
                 });
             }
